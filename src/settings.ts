@@ -144,7 +144,11 @@ export const settings = {
     label: 'Discord embed',
     description: 'Every part of an embed, each text a template. Render it with renderEmbed().',
     default: { title: 'Example Plugin', description: 'Hello {name}', color: 'blue', timestamp: true },
-    variables: ['name', 'world', 'time'],
+    variables: {
+      name: 'Display name of the person this is about',
+      world: 'World they are in, empty when unknown',
+      time: 'Local time the report was made',
+    },
   },
   rules: {
     kind: 'list',
