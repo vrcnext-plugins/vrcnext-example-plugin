@@ -90,7 +90,13 @@ node scripts/sign-plugin.mjs keygen
 ```
 
 Keep `vrcnext-signing-key.txt` out of the repository (`.gitignore` already covers it), and put
-its fingerprint in this README so users can compare it against what VRCNext shows them. Then,
+its fingerprint in this README so users can compare it against what VRCNext shows them.
+
+This repository's own releases are signed by:
+
+```
+1bc6-e13e-c44c-3bd0-f5a8-5618-8b9b-919c
+``` Then,
 for each release, from a clean working tree:
 
 ```bash
