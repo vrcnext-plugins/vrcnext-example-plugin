@@ -1,0 +1,65 @@
+# Signs the tracked tree and commits plugin.sig, from a VRCNEXT_SIGNING_KEY repository secret
+# (Settings → Secrets and variables → Actions). The secret never leaves the runner; only the
+# signature is pushed back.
+#
+# NOTE ON THE TRIGGERS BELOW
+#
+# The `push:` trigger is commented out because GitHub Actions do not run on the account this
+# repository lives on — jobs are queued and never picked up, so an automatic trigger here would
+# look like it works and silently never sign anything. `workflow_dispatch` is left live so the
+# job can still be started by hand from the Actions tab.
+#
+# **If you forked this repository, uncomment `push:` and delete this note.** On an account where
+# Actions run, that is the trigger you want: every push to the default branch re-signs the tree.
+#
+# Either way, signing locally and committing plugin.sig alongside the code is the option with no
+# window in which the branch is unsigned and the bridge refuses to install it:
+#
+#     node scripts/sign-plugin.mjs sign --key /path/to/vrcnext-signing-key.txt
+name: Sign
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch or tag to sign
+        required: false
+        default: main
+  # push:
+  #   branches: [main]
+  #   paths-ignore: [plugin.sig]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sign-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sign the tracked tree
+        env:
+          VRCNEXT_SIGNING_KEY: ${{ secrets.VRCNEXT_SIGNING_KEY }}
+        run: |
+          test -n "$VRCNEXT_SIGNING_KEY" || { echo "VRCNEXT_SIGNING_KEY is not set"; exit 1; }
+          node scripts/sign-plugin.mjs sign
+          node scripts/sign-plugin.mjs verify
+
+      - name: Commit plugin.sig if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --quiet -- plugin.sig && { echo "signature unchanged"; exit 0; }
+          git add plugin.sig
+          git commit -m "Sign $(git rev-parse --short HEAD^{commit})"
+          git push

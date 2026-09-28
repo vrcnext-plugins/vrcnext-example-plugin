@@ -1,0 +1,22 @@
+{
+  "name": "vrcnext-example-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Template and reference VRCNext plugin: every capability, one section per file.",
+  "license": "Unlicense",
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit -p tsconfig.json && eslint .",
+    "sign": "node scripts/sign-plugin.mjs sign",
+    "verify": "node scripts/sign-plugin.mjs verify"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "eslint": "^9.39.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2"
+  },
+  "dependencies": {
+    "@vrcnext/plugin-api": "file:../vrcnext-plugin-system/packages/api"
+  }
+}
