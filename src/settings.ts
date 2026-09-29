@@ -166,7 +166,7 @@ export const settings = {
    */
   windowSize: defineCustomSetting<WindowSize>({
     kind: 'custom',
-    label: 'Window size',
+    label: 'Viewport size',
     description: 'A control the plugin draws itself.',
     default: { width: 800, height: 600 },
     coerce: (value) => {
