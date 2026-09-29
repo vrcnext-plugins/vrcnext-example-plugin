@@ -59,8 +59,8 @@ function capabilities(ctx: Ctx): HTMLElement {
     children: [
       k.row({
         label: 'OSC',
-        value: ctx.osc.available ? k.badge('ok', 'Ready') : k.badge('warn', 'Windows only'),
-        detail: 'Sent through VRCNext’s own sockets.',
+        value: ctx.osc.available ? k.badge('ok', 'Ready') : k.badge('warn', 'Unavailable'),
+        detail: 'Through VRCNext’s own sockets, or the bridge’s where VRCNext has none.',
       }),
       k.row({
         label: 'Network',
