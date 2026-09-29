@@ -2,7 +2,7 @@
   "id": "example-plugin",
   "name": "Example Plugin",
   "version": "1.0.0",
-  "apiVersion": "^0.3.0",
+  "apiVersion": "^0.5.0",
   "description": "Template and reference plugin: every host capability, one section per file, delete what you do not need.",
   "author": "vrcnext-plugins",
   "homepage": "https://github.com/vrcnext-plugins/vrcnext-example-plugin",
