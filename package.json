@@ -1,6 +1,6 @@
 {
   "name": "vrcnext-example-plugin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "description": "Template and reference VRCNext plugin: every capability, one section per file.",
   "license": "Unlicense",

@@ -1,12 +1,16 @@
 {
   "id": "example-plugin",
   "name": "Example Plugin",
-  "version": "1.0.4",
-  "apiVersion": "^0.7.0",
+  "version": "1.0.5",
+  "apiVersion": "^0.8.0",
   "description": "Template and reference plugin: every host capability, one section per file, delete what you do not need.",
   "author": "vrcnext-plugins",
   "homepage": "https://github.com/vrcnext-plugins/vrcnext-example-plugin",
-  "tags": ["developer", "osc", "notifications"],
+  "tags": [
+    "developer",
+    "osc",
+    "notifications"
+  ],
   "permissions": [
     "host:events",
     "gamelog",
@@ -18,8 +22,16 @@
     "native",
     "clipboard"
   ],
-  "optionalPermissions": ["network"],
+  "optionalPermissions": [
+    "network"
+  ],
   "actions": [],
-  "events": ["friendTimelineEvent", "vrcCurrentInstance", "openDeepLink"],
-  "hosts": ["api.github.com"]
+  "events": [
+    "friendTimelineEvent",
+    "vrcCurrentInstance",
+    "openDeepLink"
+  ],
+  "hosts": [
+    "api.github.com"
+  ]
 }
