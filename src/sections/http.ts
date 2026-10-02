@@ -14,6 +14,8 @@ import type { Ctx } from '../state.js';
 
 export async function fetchStars(ctx: Ctx): Promise<string> {
   if (!(await ctx.permissions.request('network'))) return 'Network access declined.';
+  // reuse: GitHub's star count is GitHub's; nothing in VRCNext knows it. This section
+  // exists to demonstrate `ctx.http`, so the request is the point.
   const response = await ctx.http.fetch(
     'https://api.github.com/repos/vrcnext-plugins/vrcnext-plugin-system',
     { headers: { Accept: 'application/vnd.github+json' } },
